@@ -1,8 +1,5 @@
 package com.springtiny.helper;
 
-import com.sun.deploy.util.ReflectionUtil;
-import sun.reflect.Reflection;
-
 import java.util.HashMap;
 
 public class BeanHelper {
