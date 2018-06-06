@@ -2,9 +2,11 @@ package com.springtiny.helper;
 
 import com.springtiny.constants.ConfigConstant;
 import com.springtiny.utils.PropsUtil;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Properties;
 
+@Slf4j
 public class ConfigHelper {
     private static final Properties CONFIG_PROPS = PropsUtil.loadProps(ConfigConstant.CONFIG_FILE);
 

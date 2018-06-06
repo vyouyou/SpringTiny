@@ -1,7 +1,10 @@
 package com.springtiny.helper;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.HashMap;
 
+@Slf4j
 public class BeanHelper {
     static private HashMap<Class<?>,Object> BEAN_MAP = new HashMap<>();
 

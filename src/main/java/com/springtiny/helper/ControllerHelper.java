@@ -5,15 +5,15 @@ import com.springtiny.bean.Handler;
 import com.springtiny.bean.Request;
 import com.springtiny.enums.MethodEnum;
 import com.springtiny.utils.CollectionUtil;
+import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Method;
-import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import static com.springtiny.helper.ClassHelper.getControllerSet;
-
+@Slf4j
 public class ControllerHelper {
     private static final Map<Request, Handler> REQUEST_MAP = new HashMap<>();
 
