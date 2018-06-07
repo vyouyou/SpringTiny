@@ -78,7 +78,7 @@ public class ClassUtils {
                 className = packageName + "." + className;
                 doAddClass(classSet,className);
             }else{
-                //递归
+                //递归 说明base包下面还有包，所以继续向下寻找，而且包名也要增加
                 String subPackagePath = fileName;
                 if(StringUtil.isNotEmpty(fileName)){
                     subPackagePath = packagePath + "/" + subPackagePath;

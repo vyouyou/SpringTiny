@@ -35,7 +35,7 @@ public class DispatcherServlet extends HttpServlet {
         /**
          * 初始化loader
          */
-        HelperLoader.init();
+//        HelperLoader.init();
         ServletContext servletContext = servletConfig.getServletContext();
         ServletRegistration jspServlet = servletContext.getServletRegistration("jsp");
         jspServlet.addMapping(ConfigHelper.getAppJspPath() + "*");

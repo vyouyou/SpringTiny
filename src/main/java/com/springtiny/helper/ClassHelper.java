@@ -15,7 +15,6 @@ public class ClassHelper {
     private static Set<Class<?>> CLASS_SET;
 
     static {
-        ConfigHelper.getAppBasePackage();
         CLASS_SET = ClassUtils.getClassSet(ConfigHelper.getAppBasePackage());
     }
 
