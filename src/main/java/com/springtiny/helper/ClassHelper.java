@@ -5,6 +5,7 @@ import com.springtiny.annotation.Service;
 import com.springtiny.utils.ClassUtils;
 import lombok.extern.slf4j.Slf4j;
 
+import java.lang.annotation.Annotation;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -54,5 +55,35 @@ public class ClassHelper {
         return CLASS_SET.stream().filter(clazz ->
                 clazz.isAnnotationPresent(Service.class) || clazz.isAnnotationPresent(Controller.class)
         ).collect(Collectors.toSet());
+    }
+
+    /**
+     * 获取基础包下某类的所有子类或者实现类
+     * @param superClass
+     * @return
+     */
+    public static Set<Class<?>> getClassSetBySuper(Class<?> superClass){
+        Set<Class<?>> classSet = new HashSet<>();
+        CLASS_SET.stream().forEach(clazz->{
+            if(superClass.isAssignableFrom(clazz)&&!superClass.equals(clazz)){
+                classSet.add(clazz);
+            }
+        });
+        return classSet;
+    }
+
+    public static Set<Class<?>> getClassSetByAnnotation(Class<? extends Annotation> annotionClass){
+        Set<Class<?>> classSet = new HashSet<>();
+        for (Class clazz:
+             CLASS_SET) {
+            log.info("============>"+clazz.getName());
+            if(clazz.equals(annotionClass)){
+                classSet.add(clazz);
+            }
+        }
+//        CLASS_SET.stream().forEach(clazz->{
+//
+//        });
+        return classSet;
     }
 }

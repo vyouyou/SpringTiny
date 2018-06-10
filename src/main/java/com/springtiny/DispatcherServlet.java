@@ -35,7 +35,7 @@ public class DispatcherServlet extends HttpServlet {
         /**
          * 初始化loader
          */
-//        HelperLoader.init();
+        HelperLoader.init();
         ServletContext servletContext = servletConfig.getServletContext();
         ServletRegistration jspServlet = servletContext.getServletRegistration("jsp");
         jspServlet.addMapping(ConfigHelper.getAppJspPath() + "*");
@@ -64,7 +64,6 @@ public class DispatcherServlet extends HttpServlet {
         }
         //获取body
         String body = CodeUtil.decodeUrl(SteamUtil.getString(req.getInputStream()));
-        log.info(body);
         if (StringUtil.isNotEmpty(body)) {
             String[] params = body.split("&");
             Arrays.stream(params).forEach(param -> {
