@@ -1,5 +1,6 @@
 package com.springtiny.controller;
 
+import com.springtiny.annotation.AutoWired;
 import com.springtiny.annotation.Controller;
 import com.springtiny.annotation.RequestMapping;
 import com.springtiny.bean.Data;
@@ -16,9 +17,13 @@ import java.lang.reflect.Proxy;
 @Controller
 @Slf4j
 public class TestController implements Annotation{
+    @AutoWired
+    TestService testService;
+
     @RequestMapping(value = "/test",method = MethodEnum.GET)
     public Data getMethod(RequestParam requestParam){
         Temp temp = new Temp();
+        testService.helloService();
         temp.setA("aaaaa");
         return new Data(temp);
     }

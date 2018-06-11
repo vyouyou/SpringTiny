@@ -1,9 +1,11 @@
 package com.springtiny.helper;
 
 import com.springtiny.annotation.Aspect;
+import com.springtiny.annotation.Service;
 import com.springtiny.proxy.AspectProxy;
 import com.springtiny.proxy.Proxy;
 import com.springtiny.proxy.ProxyManager;
+import com.springtiny.proxy.TransactionProxy;
 import lombok.extern.slf4j.Slf4j;
 
 import java.lang.annotation.Annotation;
@@ -36,10 +38,10 @@ public class AopHelper {
      */
     private static Set<Class<?>> createTargetClassSet(Aspect aspect) throws Exception{
         Set<Class<?>> targetClassSet = new HashSet<>();
-        Class<? extends Annotation> annotation = aspect.value();
+        Class<? extends Annotation> clazz = aspect.value();
         //这个 aspect.value() 的作用目标，获取这些class
-        if (annotation != null && !annotation.equals(Aspect.class)){
-            targetClassSet.addAll(ClassHelper.getClassSetByAnnotation(annotation));
+        if (clazz != null && !clazz.equals(Aspect.class)){
+            targetClassSet.addAll(ClassHelper.getClassSetByClass(clazz));
         }
         return targetClassSet;
     }
@@ -52,16 +54,33 @@ public class AopHelper {
     private static Map<Class<?>,Set<Class<?>>> createProxyMap() throws Exception {
         Map<Class<?>,Set<Class<?>>> proxyMap = new HashMap<>();
         //获取AspectProxy的子类
+        addAspectProxy(proxyMap);
+        addTransactionProxy(proxyMap);
+        return proxyMap;
+    }
+
+    /**
+     * 创建aspect和它作用的class
+     * @param proxyMap
+     * @throws Exception
+     */
+    private static void addAspectProxy(Map<Class<?>,Set<Class<?>>> proxyMap) throws Exception {
         Set<Class<?>> proxyClassSet = ClassHelper.getClassSetBySuper(AspectProxy.class);
         for(Class<?> proxyClass:proxyClassSet){
-            //还要带有aspect注解
             if(proxyClass.isAnnotationPresent(Aspect.class)){
                 Aspect aspect = proxyClass.getAnnotation(Aspect.class);
                 Set<Class<?>> targetClassSet = createTargetClassSet(aspect);
                 proxyMap.put(proxyClass,targetClassSet);
             }
         }
-        return proxyMap;
+    }
+
+    /**
+     * 获取所有service
+     * @param proxyMap
+     */
+    private static void addTransactionProxy(Map<Class<?>,Set<Class<?>>> proxyMap){
+        proxyMap.put(TransactionProxy.class,ClassHelper.getClassSetByAnnotation(Service.class));
     }
 
     /**

@@ -6,6 +6,7 @@ import com.springtiny.utils.ClassUtils;
 import lombok.extern.slf4j.Slf4j;
 
 import java.lang.annotation.Annotation;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -76,7 +77,18 @@ public class ClassHelper {
         Set<Class<?>> classSet = new HashSet<>();
         for (Class clazz:
              CLASS_SET) {
-            if(clazz.equals(annotionClass)){
+            if(clazz.isAnnotationPresent(annotionClass)){
+                classSet.add(clazz);
+            }
+        }
+        return classSet;
+    }
+
+    public static Collection<? extends Class<?>> getClassSetByClass(Class<? extends Annotation> cls) {
+        Set<Class<?>> classSet = new HashSet<>();
+        for (Class clazz:
+                CLASS_SET) {
+            if(clazz.equals(cls)){
                 classSet.add(clazz);
             }
         }

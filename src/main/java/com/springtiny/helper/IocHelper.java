@@ -16,8 +16,9 @@ public class IocHelper {
             beanMap.forEach((key, value) -> {
                 Class<?> beanClass = key;
                 Object beanInstance = value;
-                Field[] fields = beanClass.getFields();
+                Field[] fields = beanClass.getDeclaredFields();
                 Arrays.stream(fields).forEach(field -> {
+                    field.setAccessible(true);
                     if(field.isAnnotationPresent(AutoWired.class));
                     Class<?> fieldClass = field.getType();
                     Object fieldObj = beanMap.get(fieldClass);

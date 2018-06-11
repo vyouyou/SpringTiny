@@ -129,4 +129,51 @@ public class DatabaseHelper {
         Object[] params = fieldMap.values().toArray();
         return executeUpdate(sql, params) == 1;
     }
+
+    /**
+     * 开启事务
+     */
+    public static void beginTransaction(){
+        Connection conn = getConnection();
+        if(conn !=null){
+            try {
+                conn.setAutoCommit(false);
+            } catch (SQLException e) {
+                log.error(e.getMessage());
+                e.printStackTrace();
+            }finally {
+                CONNECTION_HOLDER.set(conn);
+            }
+        }
+    }
+
+    public static void commitTransaction(){
+        Connection conn = getConnection();
+        if(conn !=null){
+            try {
+                conn.commit();
+                conn.close();
+            } catch (SQLException e) {
+                log.error(e.getMessage());
+                e.printStackTrace();
+            }finally {
+                CONNECTION_HOLDER.remove();
+            }
+        }
+    }
+
+    public static void rollbackTransaction(){
+        Connection conn = getConnection();
+        if(conn!=null){
+            try {
+                conn.rollback();
+                conn.close();
+            } catch (SQLException e) {
+                log.error(e.getMessage());
+                e.printStackTrace();
+            }finally {
+                CONNECTION_HOLDER.remove();
+            }
+        }
+    }
 }

@@ -7,6 +7,7 @@ import java.util.List;
 
 public class ProxyManager {
     public static <T> T createProxy(final Class<?> targetClass,final List<Proxy> proxyList){
+        System.out.println("proxylist"+proxyList.size());
         return (T) Enhancer.create(targetClass,
                 (MethodInterceptor) (o, method, objects, methodProxy) -> new ProxyChain(targetClass,o,method,methodProxy,objects,proxyList).doProxyChain());
     }
