@@ -29,8 +29,6 @@ public class AspectProxy implements Proxy{
         }finally {
             end();
         }
-        
-        
         return result;
     }
 

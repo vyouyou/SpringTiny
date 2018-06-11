@@ -22,7 +22,6 @@ public class AopHelper {
                 BeanHelper.setBean(targetClass,proxy);
             }
         } catch (Exception e) {
-            log.info("================>");
             log.info(e.getMessage());
         }
 

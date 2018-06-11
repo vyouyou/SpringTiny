@@ -18,7 +18,6 @@ public class HelperLoader {
                 ControllerHelper.class
         };
         Arrays.stream(classList).forEach(aClass -> {
-            log.info("aaaaaaa" + aClass.getName());
             ClassUtils.loadClass(aClass.getName(),true);
         });
     }

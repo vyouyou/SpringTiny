@@ -76,14 +76,10 @@ public class ClassHelper {
         Set<Class<?>> classSet = new HashSet<>();
         for (Class clazz:
              CLASS_SET) {
-            log.info("============>"+clazz.getName());
             if(clazz.equals(annotionClass)){
                 classSet.add(clazz);
             }
         }
-//        CLASS_SET.stream().forEach(clazz->{
-//
-//        });
         return classSet;
     }
 }

@@ -9,6 +9,7 @@ import java.util.List;
 
 @Getter
 public class ProxyChain {
+    //目标类
     private final Class<?> targetClass;
 
     private final Object targetObject;
