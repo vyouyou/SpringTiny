@@ -18,8 +18,19 @@ public class ReflectionUtil {
     public static Object invokeMethod(Object bean, Method method, RequestParam param){
         Object result = null;
         try {
-            String a ="aaa";
             result = method.invoke(bean,param);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public static Object invokeMethod(Object bean,Method method){
+        Object result = null;
+        try {
+            result = method.invoke(bean);
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         } catch (InvocationTargetException e) {

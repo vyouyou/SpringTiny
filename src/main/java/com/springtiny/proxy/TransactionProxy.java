@@ -29,7 +29,7 @@ public class TransactionProxy implements Proxy{
                 log.info("transaction commit");
             }catch(Exception e){
                 log.error(e.getMessage());
-                DatabaseHelper.closeConnection();
+                DatabaseHelper.rollbackTransaction();
                 throw e;
             }finally {
                 FLAG_HOLDER.remove();

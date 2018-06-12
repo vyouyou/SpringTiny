@@ -28,6 +28,13 @@ public class TestController implements Annotation{
         return new Data(temp);
     }
 
+    @RequestMapping(value="/test-no-param",method = MethodEnum.GET)
+    public Data noParam(){
+        Temp temp = new Temp();
+        temp.setA("bbb");
+        return new Data(temp);
+    }
+
     @Override
     public Class<? extends Annotation> annotationType() {
         return null;
